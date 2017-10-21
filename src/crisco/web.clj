@@ -26,7 +26,10 @@
   (GET "/" []
        {:status 200
         :headers {"Content-Type" "text/plain"}
-        :body (pr-str ["Hello" :from 'Heroku])})
+        :body (slurp (io/resource "index.html"))})
+  (GET "/gh" []
+       {:status 301
+        :headers {"Location" "https://github.com"}})
   (ANY "*" []
        (route/not-found (slurp (io/resource "404.html")))))
 
